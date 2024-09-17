@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(function() {
+            var gkey = 0;
+            var productmodel = {
+                id : gkey,
+                name : "Ginger"
+            };
+
+            $.getJSON("http://localhost:8080/rest/products", function(result){
+                $.each(result, function(key,value) {
+                    $("#productsJson").append(value.id+". "+value.name+" ");
+                    gkey = parseInt(value.id)+1;
+                    productmodel.id = gkey;
+                });
+            });
+
+            $("button").click(function() {
+
+                let pname = prompt('Type name here');
+                productmodel.name = pname;
+                var requestJSON = JSON.stringify(productmodel);
+                $.ajax({
+                    type : "POST",
+                    url : "http://localhost:8080/rest/products",
+                    headers : {
+                        "Content-Type" : "application/json"
+                    },
+                    data : requestJSON,
+                    success : function(data) {
+                        $("#productsJson").empty();
+                        $.getJSON("http://localhost:8080/rest/products", function(result){
+                            $.each(result, function(key,value) {
+                                $("#productsJson").append(value.id+". "+value.name+" ");
+                                gkey = parseInt(value.id)+1;
+                                productmodel.id = gkey;
+                            });
+                        });
+                    },
+                    error : function(data) {
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="productsJson"></div>
+
+<button>add new product</button>
+
+<br/>
+
+<a href="/view-products">View products</a>
+</body>
+</html>
