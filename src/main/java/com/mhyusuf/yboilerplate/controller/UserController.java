@@ -3,6 +3,10 @@ package com.mhyusuf.yboilerplate.controller;
 import com.mhyusuf.yboilerplate.entity.User;
 import com.mhyusuf.yboilerplate.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,9 +19,16 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public Page<User> getAllUsers(@RequestParam(value = "page", defaultValue = "1") int page,
+                                  @RequestParam(value = "size", defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        return userRepository.findAll(pageable);
     }
+
+//    @GetMapping
+//    public Page<User> getAllUsers(@PageableDefault(page = 0, size = 10) Pageable pageable) {
+//        return userRepository.findAll(pageable);
+//    }
 
     @PostMapping
     public User createUser(@RequestBody User user) {
