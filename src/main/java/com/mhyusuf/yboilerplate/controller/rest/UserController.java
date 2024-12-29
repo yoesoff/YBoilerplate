@@ -1,4 +1,4 @@
-package com.mhyusuf.yboilerplate.controller;
+package com.mhyusuf.yboilerplate.controller.rest;
 
 import com.mhyusuf.yboilerplate.entity.User;
 import com.mhyusuf.yboilerplate.repository.UserRepository;
@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -25,6 +24,11 @@ public class UserController {
         return userRepository.findAll(pageable);
     }
 
+
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException(String.format("User with id %d not found", id)));
+    }
 //    @GetMapping
 //    public Page<User> getAllUsers(@PageableDefault(page = 0, size = 10) Pageable pageable) {
 //        return userRepository.findAll(pageable);
