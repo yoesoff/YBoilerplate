@@ -3,13 +3,13 @@ package com.mhyusuf.yboilerplate.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller public class ViewController {
+@Controller public class ProductViewController {
     @GetMapping("/view-products")
     public String viewProducts() {
-        return "view-products";
+        return "products/view-products";
     }
     @GetMapping("/add-products")
     public String addProducts() {
-        return "add-products";
+        return "products/add-products";
     }
 }

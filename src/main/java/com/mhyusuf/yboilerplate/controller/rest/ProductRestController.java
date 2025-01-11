@@ -30,5 +30,22 @@ public class ProductRestController {
         productList.add(newProduct);
         return newProduct;  // return the added product as a response
     }
-}
 
+    // DELETE endpoint to delete a product by id
+    @DeleteMapping("/products/{id}")
+    public void deleteProduct(@PathVariable String id) {
+        productList.removeIf(product -> product.getId().equals(id));
+    }
+
+    // PUT endpoint to update a product by id
+    @PutMapping("/products/{id}")
+    public Product updateProduct(@PathVariable String id, @RequestBody Product updatedProduct) {
+        for (Product product : productList) {
+            if (product.getId().equals(id)) {
+                product.setName(updatedProduct.getName());
+                return product;
+            }
+        }
+        return null;  // or throw an exception if the product is not found
+    }
+}
