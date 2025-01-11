@@ -2,9 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title th:text="'Welcome, ' + ${name}"></title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1 th:text="'Welcome, ' + ${name}"></h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Dashboard</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/greeting">Greeting Page</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/rest/greeting">RESTful Greeting</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/actuator/health">Health Check</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/actuator/info">Application Info</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container mt-5">
+    <div class="jumbotron">
+        <h1 class="display-4" th:text="'Welcome, ' + ${name}"></h1>
+        <p class="lead">This is a simple home dashboard example using Bootstrap.</p>
+        <hr class="my-4">
+        <p>Use this document as a way to quickly start any new project.</p>
+    </div>
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Project Description</h5>
+            <p class="card-text">This project is a Spring Boot application with a simple greeting feature and RESTful endpoints.</p>
+        </div>
+    </div>
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Available Endpoints</h5>
+            <ul>
+                <li><code>/greeting</code> - HTML greeting page</li>
+                <li><code>/rest/greeting</code> - RESTful greeting endpoint</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Actuator Endpoints</h5>
+            <ul>
+                <li><code>/actuator/health</code> - Health check endpoint</li>
+                <li><code>/actuator/info</code> - Application info endpoint</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
