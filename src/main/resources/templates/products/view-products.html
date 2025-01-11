@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Products</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.getJSON("http://localhost:8080/rest/products", function(result){
+                $("#productsJson").empty();
+                $.each(result, function(key, value) {
+                    $("#productsJson").append(
+                        `<div class="d-flex justify-content-between align-items-center mb-2">
+                            <span>${value.id}. ${value.name}</span>
+                        </div>`
+                    );
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4">Product List</h1>
+    <div id="productsJson" class="mb-4"></div>
+    <a href="/add-products" class="btn btn-primary">Add new product</a>
+</div>
+</body>
+</html>

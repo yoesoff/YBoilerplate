@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Products</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var gkey = 0;
+            var productmodel = {
+                id: gkey,
+                name: "Ginger"
+            };
+
+            function fetchProducts() {
+                $.getJSON("http://localhost:8080/rest/products", function(result) {
+                    $("#productsJson").empty();
+                    $.each(result, function(key, value) {
+                        $("#productsJson").append(
+                            `<div class="d-flex justify-content-between align-items-center mb-2">
+                                <span>${value.id}. ${value.name}</span>
+                                <button class="btn btn-danger btn-sm" onclick='deleteProduct("${value.id}")'>Delete</button>
+                            </div>`
+                        );
+                        gkey = parseInt(value.id) + 1;
+                        productmodel.id = gkey;
+                    });
+                });
+            }
+
+            fetchProducts();
+
+            $("#addProductForm").submit(function(event) {
+                event.preventDefault();
+                let pname = $("#productName").val();
+                productmodel.name = pname;
+                var requestJSON = JSON.stringify(productmodel);
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/rest/products",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    data: requestJSON,
+                    success: function(data) {
+                        fetchProducts();
+                        $("#productName").val('');
+                    },
+                    error: function(data) {
+                        // Handle error
+                    }
+                });
+            });
+
+            window.deleteProduct = function(id) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "http://localhost:8080/rest/products/" + id,
+                    success: function(data) {
+                        fetchProducts();
+                    },
+                    error: function(data) {
+                        // Handle error
+                    }
+                });
+            };
+        });
+    </script>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4">Product List</h1>
+    <div id="productsJson" class="mb-4"></div>
+    <form id="addProductForm" class="form-inline mb-4">
+        <div class="form-group mr-2">
+            <label for="productName" class="sr-only">Product Name</label>
+            <input type="text" class="form-control" id="productName" placeholder="Enter product name" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add new product</button>
+    </form>
+    <a href="/view-products" class="btn btn-link">View products</a>
+</div>
+</body>
+</html>
