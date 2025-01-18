@@ -1,9 +1,7 @@
-package com.mhyusuf.yboilerplate.service.impl;
+package com.mhyusuf.yboilerplate.auth.service;
 
-import com.mhyusuf.yboilerplate.entity.User;
-import com.mhyusuf.yboilerplate.exception.ResourceNotFoundException;
-import com.mhyusuf.yboilerplate.repository.UserRepository;
-import com.mhyusuf.yboilerplate.service.UserService;
+import com.mhyusuf.yboilerplate.auth.entity.User;
+import com.mhyusuf.yboilerplate.auth.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

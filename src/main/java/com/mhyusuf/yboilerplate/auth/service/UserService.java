@@ -1,6 +1,6 @@
-package com.mhyusuf.yboilerplate.service;
+package com.mhyusuf.yboilerplate.auth.service;
 
-import com.mhyusuf.yboilerplate.entity.User;
+import com.mhyusuf.yboilerplate.auth.entity.User;
 
 import java.util.List;
 import java.util.Optional;

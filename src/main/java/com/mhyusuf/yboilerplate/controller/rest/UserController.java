@@ -1,13 +1,16 @@
 package com.mhyusuf.yboilerplate.controller.rest;
 
-import com.mhyusuf.yboilerplate.entity.User;
+import com.mhyusuf.yboilerplate.auth.entity.User;
 import com.mhyusuf.yboilerplate.exception.ResourceNotFoundException;
-import com.mhyusuf.yboilerplate.service.UserService;
+import com.mhyusuf.yboilerplate.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * TODO: Implement this https://www.geeksforgeeks.org/spring-boot-3-0-jwt-authentication-with-spring-security-using-mysql-database/
+ */
 @RestController
 @RequestMapping("/users")
 public class UserController {
