@@ -1,4 +1,4 @@
-package com.mhyusuf.yboilerplate.service.impl;
+package com.mhyusuf.yboilerplate.service;
 
 import com.mhyusuf.yboilerplate.entity.User;
 import com.mhyusuf.yboilerplate.exception.ResourceNotFoundException;
