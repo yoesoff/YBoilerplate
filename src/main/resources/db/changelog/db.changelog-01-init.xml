@@ -3,73 +3,78 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 
-    <!-- Create Table: users -->
-    <changeSet id="001" author="Yusuf Ibrahim">
+    <!-- ChangeSet: Initial Table Creation -->
+    <changeSet id="01-init-schema" author="Yusuf Ibrahim">
+
+        <!-- Table: users -->
         <createTable tableName="users">
-            <column name="id" type="UUID">
+            <column name="id" type="CHAR(36)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="username" type="varchar(150)">
+            <column name="username" type="VARCHAR(50)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="email" type="varchar(255)">
+            <column name="email" type="VARCHAR(100)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="password_hash" type="varchar(255)">
+            <column name="password" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="full_name" type="varchar(255)"/>
-            <column name="phone" type="varchar(50)"/>
-            <column name="created_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP"/>
-            <column name="updated_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP"/>
-            <column name="created_by" type="varchar(100)"/>
-            <column name="updated_by" type="varchar(100)"/>
+            <column name="full_name" type="VARCHAR(100)"/>
+            <column name="phone" type="VARCHAR(20)"/>
+            <column name="role" type="VARCHAR(20)"/>
+            <column name="created_by" type="VARCHAR(100)"/>
+            <column name="updated_by" type="VARCHAR(100)"/>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
         </createTable>
-    </changeSet>
 
-    <!-- Create Table: roles -->
-    <changeSet id="002" author="Yusuf Ibrahim">
+        <!-- Table: roles -->
         <createTable tableName="roles">
-            <column name="id" type="UUID">
+            <column name="id" type="CHAR(36)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar(50)">
+            <column name="name" type="VARCHAR(50)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="description" type="varchar(255)"/>
-            <column name="created_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP"/>
-            <column name="updated_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP"/>
-            <column name="created_by" type="varchar(100)"/>
-            <column name="updated_by" type="varchar(100)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="created_by" type="VARCHAR(100)"/>
+            <column name="updated_by" type="VARCHAR(100)"/>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
         </createTable>
-    </changeSet>
 
-    <!-- Create Table: user_roles -->
-    <changeSet id="003" author="Yusuf Ibrahim">
+        <!-- Table: user_roles -->
         <createTable tableName="user_roles">
-            <column name="user_id" type="UUID">
+            <column name="id" type="CHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="CHAR(36)">
                 <constraints nullable="false"/>
             </column>
-            <column name="role_id" type="UUID">
+            <column name="role_id" type="CHAR(36)">
                 <constraints nullable="false"/>
             </column>
+            <column name="created_by" type="VARCHAR(100)"/>
+            <column name="updated_by" type="VARCHAR(100)"/>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
         </createTable>
 
-        <addPrimaryKey columnNames="user_id, role_id" constraintName="pk_user_roles" tableName="user_roles"/>
-
+        <!-- Constraints -->
         <addForeignKeyConstraint baseTableName="user_roles"
                                  baseColumnNames="user_id"
+                                 constraintName="fk_user_roles_user"
                                  referencedTableName="users"
-                                 referencedColumnNames="id"
-                                 constraintName="fk_user_roles_user"/>
+                                 referencedColumnNames="id"/>
 
         <addForeignKeyConstraint baseTableName="user_roles"
                                  baseColumnNames="role_id"
+                                 constraintName="fk_user_roles_role"
                                  referencedTableName="roles"
-                                 referencedColumnNames="id"
-                                 constraintName="fk_user_roles_role"/>
-    </changeSet>
+                                 referencedColumnNames="id"/>
 
+    </changeSet>
 </databaseChangeLog>
