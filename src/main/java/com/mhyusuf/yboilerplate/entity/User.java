@@ -21,7 +21,7 @@ public class User {
     private Long id;
 
     private String username;
-    private String passwordHash;
+    private String password;
 
     // Getter, Setter, Constructor, dll implemented by Lombok.
 

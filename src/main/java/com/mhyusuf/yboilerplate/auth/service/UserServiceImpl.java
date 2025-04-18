@@ -1,9 +1,7 @@
-package com.mhyusuf.yboilerplate.service;
+package com.mhyusuf.yboilerplate.auth.service;
 
-import com.mhyusuf.yboilerplate.entity.User;
-import com.mhyusuf.yboilerplate.exception.ResourceNotFoundException;
-import com.mhyusuf.yboilerplate.repository.UserRepository;
-import com.mhyusuf.yboilerplate.service.UserService;
+import com.mhyusuf.yboilerplate.auth.repository.UserRepository;
+import com.mhyusuf.yboilerplate.auth.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +18,7 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
 
     @Override
     public User createUser(User user) {
