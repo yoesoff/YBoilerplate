@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -20,7 +21,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) // Use AUTO for UUID generation
-    @Column(columnDefinition = "CHAR(36)")
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     private String email;
@@ -34,4 +35,12 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
+
+
+    public User(String email, String name, String pass, List<Role> roles) {
+        this.email = email;
+        this.username = name;
+        this.password = pass;
+        this.roles = new HashSet<>(roles);
+    }
 }

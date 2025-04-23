@@ -59,7 +59,7 @@ public class AuthServiceImpl implements AuthService {
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
 
         // Set role default (USER)
-        Role role = roleRepository.findByName("ROLE_USER").orElseThrow(() -> new RuntimeException("Role tidak ditemukan"));
+        Role role = roleRepository.findByName("USER").orElseThrow(() -> new RuntimeException("Role tidak ditemukan"));
         user.setRoles(Collections.singleton(role));
 
         userRepository.save(user);

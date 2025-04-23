@@ -20,11 +20,15 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) // Use AUTO for UUID generation
-    @Column(columnDefinition = "CHAR(36)")
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     private String name;
 
     @ManyToMany(mappedBy = "roles")
     private Set<User> users = new HashSet<>();
+
+    public Role(String name) {
+        this.name = name;
+    }
 }

@@ -16,6 +16,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -25,16 +26,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserDetailsService userDetailsService;
 
+    // List of endpoints to skip
+    private static final List<String> EXCLUDED_PATHS = List.of("/api/auth/login", "/api/auth/register");
+
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        String token = getTokenFromRequest(request);
-        if (StringUtils.hasText(token)) {
-            log.info("Extracted Token: {}", token);
+        String requestPath = request.getServletPath();
+
+        // Skip token validation for excluded endpoints
+        if (EXCLUDED_PATHS.contains(requestPath)) {
+            filterChain.doFilter(request, response);
+            return;
         }
 
+        String token = getTokenFromRequest(request);
         if (StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)) {
             String username = jwtTokenProvider.getUsername(token);
             log.info("Token validated for user: {}", username);
@@ -47,7 +55,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         } else {
-            log.warn("Invalid or missing token in request.");
+            log.warn("Invalid or missing token in request for path: {}", requestPath);
         }
 
         filterChain.doFilter(request, response);

@@ -6,14 +6,11 @@
 
     <changeSet id="03-create-user-roles" author="Yusuf Ibrahim">
         <createTable tableName="user_roles">
-            <column name="id" type="CHAR(36)">
+            <column name="user_id" type="BINARY(16)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="user_id" type="CHAR(36)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="role_id" type="CHAR(36)">
-                <constraints nullable="false"/>
+            <column name="role_id" type="BINARY(16)">
+                <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="created_by" type="VARCHAR(100)"/>
             <column name="updated_by" type="VARCHAR(100)"/>

@@ -6,7 +6,7 @@
 
     <changeSet id="02-create-roles" author="Yusuf Ibrahim">
         <createTable tableName="roles">
-            <column name="id" type="CHAR(36)">
+            <column name="id" type="BINARY(16)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(50)">
