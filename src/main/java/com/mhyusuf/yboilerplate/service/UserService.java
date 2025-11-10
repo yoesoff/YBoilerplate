@@ -1,14 +1,35 @@
 package com.mhyusuf.yboilerplate.service;
 
-import com.mhyusuf.yboilerplate.entity.User;
+import com.mhyusuf.yboilerplate.model.User;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-public interface UserService {
-    List<User> getAllUsers();
-    User createUser(User user);
-    Optional<User> getUserByUsername(String username);
-    Optional<User> getUserById(Long id);
-    void deleteUserById(Long id);
+@Service
+public class UserService {
+    private final Map<Long, User> userStore = new HashMap<>();
+    private long counter = 1;
+
+    public User createUser(User user) {
+        user.setId(counter++);
+        userStore.put(user.getId(), user);
+        return user;
+    }
+
+    public User updateUser(User user) {
+        userStore.put(user.getId(), user);
+        return user;
+    }
+
+    public User getUser(Long id) {
+        return userStore.get(id);
+    }
+
+    public boolean deleteUser(Long id) {
+        return userStore.remove(id) != null;
+    }
+
+    public Collection<User> getAllUsers() {
+        return userStore.values();
+    }
 }
