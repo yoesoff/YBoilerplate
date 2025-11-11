@@ -5,9 +5,17 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 
-    <!-- AUTH MODULE -->
-    <include file="db/changelog/auth/db.changelog-user.xml"/>
-    <include file="db/changelog/auth/db.changelog-role.xml"/>
-    <include file="db/changelog/auth/db.changelog-user-role.xml"/>
-    <include file="/db/changelog/item/db.changelog-item.xml"/>
+    <!-- ============================== -->
+    <!--         AUTH MODULE            -->
+    <!-- ============================== -->
+    <include file="auth/db.changelog-user.xml" relativeToChangelogFile="true"/>
+    <include file="auth/db.changelog-role.xml" relativeToChangelogFile="true"/>
+    <include file="auth/db.changelog-user-role.xml" relativeToChangelogFile="true"/>
+
+    <!-- ============================== -->
+    <!--         ITEM MODULE            -->
+    <!-- ============================== -->
+    <include file="item/db.changelog-item.xml" relativeToChangelogFile="true"/>
+    <include file="item/db-create-sales-and-sale-items.xml" relativeToChangelogFile="true"/>
+
 </databaseChangeLog>

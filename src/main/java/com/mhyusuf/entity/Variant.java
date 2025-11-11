@@ -2,6 +2,8 @@ package com.mhyusuf.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.math.BigDecimal;
 import java.util.*;
 
 @Getter
@@ -31,7 +33,7 @@ public class Variant {
     private String size;
 
     @Column(nullable = false)
-    private Double price;
+    private BigDecimal price;
 
     @Column(nullable = false)
     private Integer stock = 0;
@@ -48,7 +50,7 @@ public class Variant {
     @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date updatedAt = new Date();
 
-    public Variant(Item item, String variantName, String color, String size, Double price, Integer stock) {
+    public Variant(Item item, String variantName, String color, String size, BigDecimal price, Integer stock) {
         this.item = item;
         this.variantName = variantName;
         this.color = color;

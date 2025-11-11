@@ -1,6 +1,8 @@
 package com.mhyusuf.dto;
 
 import lombok.*;
+
+import java.math.BigDecimal;
 import java.util.*;
 
 @Getter
@@ -14,7 +16,7 @@ public class VariantDto {
     private String variantName;
     private String color;
     private String size;
-    private Double price;
+    private BigDecimal price;
     private Integer stock;
 
     private String createdBy;

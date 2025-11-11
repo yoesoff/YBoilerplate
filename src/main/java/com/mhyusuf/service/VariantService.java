@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -60,7 +61,13 @@ public class VariantService {
             throw new BadRequestException("Variant with the same name already exists for this item");
         }
 
-        if (dto.getPrice() == null || dto.getPrice() < 0) {
+        /* Validasi harga harus >= 0 menggunakan BigDecimal
+         * compareTo(BigDecimal.ZERO):
+         * > 0 → value lebih besar dari nol
+         * == 0 → value sama dengan nol
+         * < 0 → value lebih kecil dari nol
+         */
+        if (dto.getPrice() == null || dto.getPrice().compareTo(BigDecimal.ZERO) < 0) {
             throw new BadRequestException("Price must be greater than or equal to zero");
         }
 
@@ -107,7 +114,15 @@ public class VariantService {
         }
 
         if (dto.getPrice() != null) {
-            if (dto.getPrice() < 0) throw new BadRequestException("Price must not be negative");
+            /* Validasi harga harus >= 0 menggunakan BigDecimal
+             * compareTo(BigDecimal.ZERO):
+             * > 0 → value lebih besar dari nol
+             * == 0 → value sama dengan nol
+             * < 0 → value lebih kecil dari nol
+             */
+            if (dto.getPrice().compareTo(BigDecimal.ZERO) < 0) {
+                throw new BadRequestException("Price must not be negative");
+            }
             variant.setPrice(dto.getPrice());
         }
 
