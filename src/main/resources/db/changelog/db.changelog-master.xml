@@ -9,5 +9,5 @@
     <include file="db/changelog/auth/db.changelog-user.xml"/>
     <include file="db/changelog/auth/db.changelog-role.xml"/>
     <include file="db/changelog/auth/db.changelog-user-role.xml"/>
-
+    <include file="/db/changelog/item/db.changelog-item.xml"/>
 </databaseChangeLog>
