@@ -15,4 +15,6 @@ public interface VariantRepository extends JpaRepository<Variant, UUID> {
     Optional<Variant> findByItemAndVariantName(Item item, String variantName);
 
     List<Variant> findByStockLessThanEqual(Integer stock);
+
+    Optional<Variant> findByVariantNameAndItemId(String variantName, UUID itemId);
 }
