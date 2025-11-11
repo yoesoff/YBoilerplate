@@ -18,6 +18,28 @@
             border-radius: 12px;
             box-shadow: 0 4px 24px rgba(44,62,80,0.08);
         }
+        .api-explorer {
+            background: #e3f2fd;
+            border: 1px solid #90caf9;
+            border-radius: 8px;
+            padding: 18px 24px;
+            margin-bottom: 2em;
+            box-shadow: 0 2px 8px rgba(44,62,80,0.04);
+        }
+        .api-explorer h2 {
+            color: #1565c0;
+            margin: 0 0 0.5em 0;
+            font-size: 1.15em;
+        }
+        .api-explorer a {
+            color: #1976d2;
+            font-weight: 600;
+            text-decoration: none;
+            margin-right: 18px;
+        }
+        .api-explorer a:hover {
+            text-decoration: underline;
+        }
         h1 {
             color: #1a2533;
             font-size: 2.2em;
@@ -68,7 +90,7 @@
         }
         @media (max-width: 600px) {
             .container { padding: 8px; }
-            .controller-group { padding: 10px 8px; }
+            .controller-group, .api-explorer { padding: 10px 8px; }
         }
     </style>
 </head>
@@ -76,6 +98,13 @@
 <div class="container">
     <h1>ShopWarehouse API Documentation</h1>
 
+    <div class="api-explorer">
+        <h2>API Explorer &amp; OpenAPI Docs</h2>
+        <a href="/swagger-ui.html" target="_blank">Swagger UI</a>
+        <a href="/v3/api-docs" target="_blank">OpenAPI JSON</a>
+    </div>
+
+    <!-- API groups below (unchanged) -->
     <div class="controller-group">
         <h2>AuthController <span style="color:#888;">(/api/auth)</span></h2>
         <ul>
@@ -83,7 +112,6 @@
             <li><span class="endpoint">POST /api/auth/register</span> <span class="method">Register new user</span></li>
         </ul>
     </div>
-
     <div class="controller-group">
         <h2>UserController <span style="color:#888;">(/users)</span></h2>
         <ul>
@@ -94,7 +122,6 @@
             <li><span class="endpoint">DELETE /users/{id}</span> <span class="method">Delete user by ID</span></li>
         </ul>
     </div>
-
     <div class="controller-group">
         <h2>ItemController <span style="color:#888;">(/api/items)</span></h2>
         <ul>
@@ -105,7 +132,6 @@
             <li><span class="endpoint">DELETE /api/items/{id}</span> <span class="method">Delete item</span></li>
         </ul>
     </div>
-
     <div class="controller-group">
         <h2>VariantController <span style="color:#888;">(/api/variants)</span></h2>
         <ul>
@@ -116,7 +142,6 @@
             <li><span class="endpoint">DELETE /api/variants/{id}</span> <span class="method">Delete variant</span></li>
         </ul>
     </div>
-
     <div class="controller-group">
         <h2>StockController <span style="color:#888;">(/api/stock)</span></h2>
         <ul>
@@ -126,7 +151,6 @@
             <li><span class="endpoint">POST /api/stock/{variantId}/increase?quantity=Q</span> <span class="method">Increase stock</span></li>
         </ul>
     </div>
-
     <div class="controller-group">
         <h2>SalesController <span style="color:#888;">(/api/sales)</span></h2>
         <ul>
@@ -136,7 +160,6 @@
             <li><span class="endpoint">GET /api/sales/filter</span> <span class="method">Filter sales (by date, customer, total)</span></li>
         </ul>
     </div>
-
     <div class="controller-group">
         <h2>AdminController <span style="color:#888;">(/api)</span></h2>
         <ul>
@@ -144,14 +167,12 @@
             <li><span class="endpoint">GET /api/user</span> <span class="method">Hello User (requires USER role)</span></li>
         </ul>
     </div>
-
     <div class="controller-group">
         <h2>GreetingRestController <span style="color:#888;">(/rest)</span></h2>
         <ul>
             <li><span class="endpoint">GET /rest/greeting</span> <span class="method">Greeting endpoint</span></li>
         </ul>
     </div>
-
     <div class="controller-group">
         <h2>GreetingController <span style="color:#888;">(/)</span></h2>
         <ul>

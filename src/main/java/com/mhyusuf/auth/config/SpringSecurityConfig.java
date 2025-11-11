@@ -43,6 +43,8 @@ public class SpringSecurityConfig {
                 // Public endpoints
                 .requestMatchers("/", "/greeting", "/error").permitAll()
                 .requestMatchers("/api/auth/login", "/api/auth/register").permitAll()
+                // Swagger/OpenAPI endpoints
+                .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 // Health check and monitoring
                 .requestMatchers("/actuator/**").permitAll()
                 // Static resources (Thymeleaf, JS, CSS, etc.)
