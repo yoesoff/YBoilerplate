@@ -2,67 +2,162 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title th:text="'Welcome, ' + ${name}"></title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>API Documentation - ShopWarehouse</title>
+    <style>
+        body {
+            background: #f6f8fa;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 24px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(44,62,80,0.08);
+        }
+        h1 {
+            color: #1a2533;
+            font-size: 2.2em;
+            margin-bottom: 0.5em;
+            letter-spacing: 1px;
+        }
+        .controller-group {
+            margin-bottom: 2.5em;
+            padding: 18px 24px;
+            border-radius: 8px;
+            background: #f2f6fc;
+            box-shadow: 0 2px 8px rgba(44,62,80,0.04);
+        }
+        h2 {
+            color: #1565c0;
+            font-size: 1.25em;
+            margin-top: 0;
+            margin-bottom: 1em;
+            letter-spacing: 0.5px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e3e8ee;
+            transition: background 0.2s;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        li:hover {
+            background: #eaf1fb;
+        }
+        .endpoint {
+            font-weight: 600;
+            color: #1976d2;
+            margin-right: 18px;
+            font-family: 'Fira Mono', 'Consolas', monospace;
+        }
+        .method {
+            font-size: 0.98em;
+            color: #5c6f7c;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 8px; }
+            .controller-group { padding: 10px 8px; }
+        }
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Dashboard</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="/greeting">Greeting Page</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/rest/greeting">RESTful Greeting</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/actuator/health">Health Check</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/actuator/info">Application Info</a>
-            </li>
+<div class="container">
+    <h1>ShopWarehouse API Documentation</h1>
+
+    <div class="controller-group">
+        <h2>AuthController <span style="color:#888;">(/api/auth)</span></h2>
+        <ul>
+            <li><span class="endpoint">POST /api/auth/login</span> <span class="method">Login (returns JWT)</span></li>
+            <li><span class="endpoint">POST /api/auth/register</span> <span class="method">Register new user</span></li>
         </ul>
     </div>
-</nav>
-<div class="container mt-5">
-    <div class="jumbotron">
-        <h1 class="display-4" th:text="'Welcome, ' + ${name}"></h1>
-        <p class="lead">This is a simple home dashboard example using Bootstrap.</p>
-        <hr class="my-4">
-        <p>Use this document as a way to quickly start any new project.</p>
+
+    <div class="controller-group">
+        <h2>UserController <span style="color:#888;">(/users)</span></h2>
+        <ul>
+            <li><span class="endpoint">GET /users</span> <span class="method">List all users</span></li>
+            <li><span class="endpoint">POST /users</span> <span class="method">Create user</span></li>
+            <li><span class="endpoint">GET /users/username/{username}</span> <span class="method">Get user by username</span></li>
+            <li><span class="endpoint">GET /users/{id}</span> <span class="method">Get user by ID</span></li>
+            <li><span class="endpoint">DELETE /users/{id}</span> <span class="method">Delete user by ID</span></li>
+        </ul>
     </div>
-    <div class="card mt-4">
-        <div class="card-body">
-            <h5 class="card-title">Project Description</h5>
-            <p class="card-text">This project is a Spring Boot application with a simple greeting feature and RESTful endpoints.</p>
-        </div>
+
+    <div class="controller-group">
+        <h2>ItemController <span style="color:#888;">(/api/items)</span></h2>
+        <ul>
+            <li><span class="endpoint">GET /api/items</span> <span class="method">List all items</span></li>
+            <li><span class="endpoint">GET /api/items/{id}</span> <span class="method">Get item by ID</span></li>
+            <li><span class="endpoint">POST /api/items</span> <span class="method">Create item</span></li>
+            <li><span class="endpoint">PUT /api/items/{id}</span> <span class="method">Update item</span></li>
+            <li><span class="endpoint">DELETE /api/items/{id}</span> <span class="method">Delete item</span></li>
+        </ul>
     </div>
-    <div class="card mt-4">
-        <div class="card-body">
-            <h5 class="card-title">Available Endpoints</h5>
-            <ul>
-                <li><code>/greeting</code> - HTML greeting page</li>
-                <li><code>/rest/greeting</code> - RESTful greeting endpoint</li>
-            </ul>
-        </div>
+
+    <div class="controller-group">
+        <h2>VariantController <span style="color:#888;">(/api/variants)</span></h2>
+        <ul>
+            <li><span class="endpoint">GET /api/variants</span> <span class="method">List all variants</span></li>
+            <li><span class="endpoint">GET /api/variants/{id}</span> <span class="method">Get variant by ID</span></li>
+            <li><span class="endpoint">POST /api/variants</span> <span class="method">Create variant</span></li>
+            <li><span class="endpoint">PUT /api/variants/{id}</span> <span class="method">Update variant</span></li>
+            <li><span class="endpoint">DELETE /api/variants/{id}</span> <span class="method">Delete variant</span></li>
+        </ul>
     </div>
-    <div class="card mt-4">
-        <div class="card-body">
-            <h5 class="card-title">Actuator Endpoints</h5>
-            <ul>
-                <li><code>/actuator/health</code> - Health check endpoint</li>
-                <li><code>/actuator/info</code> - Application info endpoint</li>
-            </ul>
-        </div>
+
+    <div class="controller-group">
+        <h2>StockController <span style="color:#888;">(/api/stock)</span></h2>
+        <ul>
+            <li><span class="endpoint">GET /api/stock/{variantId}</span> <span class="method">Get stock for variant</span></li>
+            <li><span class="endpoint">PATCH /api/stock/adjust</span> <span class="method">Adjust stock</span></li>
+            <li><span class="endpoint">POST /api/stock/{variantId}/decrease?quantity=Q</span> <span class="method">Decrease stock</span></li>
+            <li><span class="endpoint">POST /api/stock/{variantId}/increase?quantity=Q</span> <span class="method">Increase stock</span></li>
+        </ul>
+    </div>
+
+    <div class="controller-group">
+        <h2>SalesController <span style="color:#888;">(/api/sales)</span></h2>
+        <ul>
+            <li><span class="endpoint">POST /api/sales</span> <span class="method">Create sale</span></li>
+            <li><span class="endpoint">GET /api/sales</span> <span class="method">List all sales</span></li>
+            <li><span class="endpoint">GET /api/sales/{id}</span> <span class="method">Get sale by ID</span></li>
+            <li><span class="endpoint">GET /api/sales/filter</span> <span class="method">Filter sales (by date, customer, total)</span></li>
+        </ul>
+    </div>
+
+    <div class="controller-group">
+        <h2>AdminController <span style="color:#888;">(/api)</span></h2>
+        <ul>
+            <li><span class="endpoint">GET /api/admin</span> <span class="method">Hello Admin (requires ADMIN role)</span></li>
+            <li><span class="endpoint">GET /api/user</span> <span class="method">Hello User (requires USER role)</span></li>
+        </ul>
+    </div>
+
+    <div class="controller-group">
+        <h2>GreetingRestController <span style="color:#888;">(/rest)</span></h2>
+        <ul>
+            <li><span class="endpoint">GET /rest/greeting</span> <span class="method">Greeting endpoint</span></li>
+        </ul>
+    </div>
+
+    <div class="controller-group">
+        <h2>GreetingController <span style="color:#888;">(/)</span></h2>
+        <ul>
+            <li><span class="endpoint">GET /</span> <span class="method">Greeting HTML page</span></li>
+        </ul>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
